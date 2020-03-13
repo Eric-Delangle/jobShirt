@@ -1,0 +1,46 @@
+<title>{% block title %}jobShirt{% endblock %}</title>
+{% block stylesheets %}
+ 
+        {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/shop/css/style.css'} %}
+        {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/shop/css/app.css'} %}
+    
+    {% endblock %}
+     {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+<div class="ui basic segment">
+    <div class="ui three column stackable grid">
+      
+        <div class="container cont_logo">
+            
+                <h1 class="police white font"><a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" alt="logo" class="ui small image" /></a>Job<span class="red dollar shad">$</span>hirt les vêtements qui vous trouvent du boulot !</h1>
+            
+            
+        </div>
+        
+        <!--message d'explication du concept-->
+        <div id="info">
+           <p class="">Soyez facilement repéré par les recruteurs !</p>
+        </div>
+        <!-- fin message -->
+        <div class="column">
+            {{ sonata_block_render_event('sylius.shop.layout.header') }}
+        </div>
+        <div class="right aligned column right">
+            {{ render(url('sylius_shop_partial_cart_summary', {'template': '@SyliusShop/Cart/_widget.html.twig'})) }}
+        </div>
+    </div>
+</div>
+{% block javascript %}
+<script>
+  window.onload = function() {
+    setTimeout(function()
+    {
+      document.getElementById("info").style.display = "block";
+    }, 5000);
+  }
+</script>
+
+{% endblock %}

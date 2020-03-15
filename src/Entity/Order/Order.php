@@ -13,4 +13,22 @@ use Sylius\Component\Core\Model\Order as BaseOrder;
  */
 class Order extends BaseOrder
 {
+    /**
+    * @ORM\OneToOne(targetEntity="App\Entity\Order\Metier")
+    * @ORM\JoinColumn(onDelete="SET NULL")
+    */
+    private $metier;
+
+    
+    public function getMetier()
+    {
+        return $this->metier;
+    }
+
+    public function setMetier(string $metier)
+    {
+        $this->metier = $metier;
+
+        return $this;
+    }
 }

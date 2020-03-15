@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
-use App\Entity\Metier;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Order\Metier;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Metier|null find($id, $lockMode = null, $lockVersion = null)

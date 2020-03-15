@@ -21,11 +21,6 @@ class Metier
      */
     private $job;
 
-    /**
-    * @ORM\OneToOne(targetEntity="App\Entity\Order\Order", cascade={"remove"})
-    * @ORM\JoinColumn(onDelete="SET NULL")
-    */
-    private $order;
 
     public function getId(): ?int
     {
@@ -44,15 +39,4 @@ class Metier
         return $this;
     }
 
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    public function setOrder($order)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
 }

@@ -1,6 +1,6 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
-{# {% form_theme form '@SyliusShop/Form/theme.html.twig' %} #}
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
@@ -9,54 +9,18 @@
 {% block title %}{{ parent() }} | {{ header|trans }}{% endblock %}
 
 {% block content %}
-            {# formulaire d'entrée du métier #}
-                 {% if not metier.job %} 
-                <div class="container choix-metier brown font-choix-metier">
-                {% form_theme form 'bootstrap_4_layout.html.twig' %} 
-                <div class="form-group top"> 
-                        {{ form_start(formjob) }} 
-                        {{ form_row(formjob.job, {'attr': {'placeholder': "Votre profession"}})}} 
-                           <button class="btn btn-success top">Enregistrer</button>  
-                        
-                        {{ form_end(formjob) }}
-                    </div>
-                </div>
-             {% endif %} 
-            {# fin de formulaire #}
-            {# Vérification si un métier a été choisi #}
-             {% if metier.job %}
-                <div class="container brown font-metier">
-                    <p>Votre job recherché est : {{ form.job }}</p>
-                </div>
-             {% endif %}
-             {# Fin de vérification #}
     {% if not cart.empty %}
-        {% include '@SyliusShop/Cart/Summary/_header.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.shop.cart.summary.after_content_header', {'cart': cart}) }}
-
+        {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
         <div class="ui stackable grid">
+       {# <div> {{ metier.metier }}</div> #}
             <div class="eleven wide column">
-                {{ sonata_block_render_event('sylius.shop.cart.summary.before_items', {'cart': cart}) }}
-
-                {% include '@SyliusShop/Cart/Summary/_items.html.twig' %}
-
-                {{ sonata_block_render_event('sylius.shop.cart.summary.after_items', {'cart': cart}) }}
+                {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
             </div>
             <div class="five wide column">
-                {{ sonata_block_render_event('sylius.shop.cart.summary.before_totals', {'cart': cart}) }}
-
-                {% include '@SyliusShop/Cart/Summary/_totals.html.twig' %}
-
-                {{ sonata_block_render_event('sylius.shop.cart.summary.after_totals', {'cart': cart}) }}
-
-                {% include '@SyliusShop/Cart/Summary/_checkout.html.twig' %}
+                {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
             </div>
         </div>
-
-        {{ sonata_block_render_event('sylius.shop.cart.summary.before_suggestions', {'cart': cart}) }}
-
-        {% include '@SyliusShop/Cart/Summary/_suggestions.html.twig' %}
+        {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
     {% else %}
         {{ messages.info('sylius.ui.your_cart_is_empty') }}
     {% endif %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Order;
 
 use App\Entity\Order\Metier;
 use Doctrine\Common\Persistence\ManagerRegistry;

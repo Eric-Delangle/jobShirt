@@ -30,34 +30,16 @@
             <div class="twelve wide right aligned column">
                 <span class="ui sub header">{{ product.code }}</span>
             </div>
-
-            {% if not metier.job %}
-            {# formulaire d'entrée du métier #}
-            <div class="container choix-metier brown font-choix-metier">
-               {% form_theme form 'bootstrap_4_layout.html.twig' %} 
-               <div class="form-group top"> 
-                    {{ form_start(form, {'method':'GET'}) }} 
-                    {{ form_widget(form.job, {'attr': {'placeholder': "Votre profession"}})}}
-                         <button class="btn btn-success top">Enregistrer</button>
-                    {{ form_end(form) }}
-                </div>
-            </div>
-            {# fin de formulaire #}
-           {% endif %}
-        </div>
+        </div> 
            
         {{ sonata_block_render_event('sylius.shop.product.show.after_price', {'product': product}) }}
 
         <div class="ui basic segment">
             <p>{{ product.shortDescription }}</p>
         </div>
-
+ 
         {{ sonata_block_render_event('sylius.shop.product.show.after_description', {'product': product}) }}
-        {% if metier.job %}
-            <div class="container brown font-metier">
-                <p>Votre job recherché est : {{ metier.job }}</p>
-            </div>
-        {% endif %}
+    
         {% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' and not product.variants.empty() %}
             {% include '@SyliusShop/Product/Show/_variantsPricing.html.twig' with {'pricing': sylius_product_variant_prices(product, sylius.channel)} %}
         {% endif %}

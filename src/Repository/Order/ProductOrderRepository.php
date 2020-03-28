@@ -42,6 +42,7 @@ class ProductOrderRepository extends EntityRepository implements OrderRepository
         return $this->createQueryBuilder('o')
             ->addSelect('channel')
             ->addSelect('customer')
+            ->addSelect('metier')
             ->innerJoin('o.channel', 'channel')
             ->leftJoin('o.customer', 'customer')
             ->andWhere('o.state = :state')

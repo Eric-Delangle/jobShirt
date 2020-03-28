@@ -14,6 +14,7 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
  */
 class Product extends BaseProduct
 {
+
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();

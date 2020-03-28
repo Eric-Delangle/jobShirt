@@ -1,2 +1,6 @@
-
+#sylius.controller.order:
+    #path: /product/add
+    #methods: [POST]
+    #defaults:
+        #_controller: app.controller.order.order:job
   

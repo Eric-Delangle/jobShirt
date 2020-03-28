@@ -18,6 +18,7 @@ use App\Form\JobType;
 use App\Entity\Order\Order;
 use App\Entity\Order\Metier;
 use FOS\RestBundle\View\View;
+use App\Entity\Order\OrderItem;
 use App\Entity\Product\Product;
 use App\Provider\ProductProvider;
 use Doctrine\Persistence\ObjectManager;
@@ -37,13 +38,14 @@ class ProductResourceController extends BaseResourceController
     {
 
         //$order = new Order();
-        $metier = new Metier();
-        $form = $this->createForm(JobType::class, $metier, [
-            'method' => 'GET'
-        ]);
-        $form->handleRequest($request);
+       // $metier = new Metier();
+      //  $form = $this->createForm(JobType::class, $metier, [
+          //  'method' => 'GET'
+      //  ]);
+       // $form->handleRequest($request);
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
+        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
+        $form = $this->resourceFormFactory->create($configuration, $newResource);
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
         $product = $this->findOr404($configuration);
 
@@ -61,7 +63,7 @@ class ProductResourceController extends BaseResourceController
 
            
         
-            dump($metier);
+           // dump($metier);
 
            
 
@@ -73,13 +75,13 @@ class ProductResourceController extends BaseResourceController
                             'configuration' => $configuration,
                             'metadata' => $this->metadata,
                             'resource' => $product,
-                            'metier' => $metier,
+                            //'metier' => $metier,
                             //'order' => $metier,
                             //'recommendedProducts' => $recommendedProducts,
                             'form' => $form->createView(),
                             $this->metadata->getName() => $product,
                         ]);
-                        
+                        /*
                              if ($form->isSubmitted() && $form->isValid()) {
                                //  $order->getMetier();
                                 $manager = $this->getDoctrine()->getManager();
@@ -91,9 +93,9 @@ class ProductResourceController extends BaseResourceController
                             return $this->viewHandler->handle($configuration, $view);
                             
                             }
-                            
+                            */
                     return $this->viewHandler->handle($configuration, $view);
-  
+ 
                 }
         
         }

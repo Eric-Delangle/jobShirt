@@ -13,4 +13,21 @@ use Sylius\Component\Core\Model\OrderItem as BaseOrderItem;
  */
 class OrderItem extends BaseOrderItem
 {
+
+ /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $metier;
+    
+    public function getMetier()
+    {
+        return $this->metier;
+    }
+
+    public function setMetier(string $metier)
+    {
+        $this->metier = $metier;
+
+        return $this;
+    }
 }

@@ -23,12 +23,12 @@
                     
 
     {{ form_row(form.cartItem.quantity) }}
-   
+
     {{ sonata_block_render_event('sylius.shop.product.show.add_to_cart_form', {'product': product) }, {'order_item' : metier}}
 
     <button type="submit" class="ui huge primary icon labeled button"><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
     {{ form_row(form._token) }}
-{{ form_row(form.metier, {'attr': {'placeholder': "Votre profession"}})}}
+
     {{ form_end(form, {'render_rest': false}) }}
     
 </div>

@@ -104,11 +104,11 @@ sylius_order:
         order:
             classes:
                 model: App\Entity\Order\Order
-                controller: App\Controller\Order\ProductOrderController
+                controller: App\Controller\Order\OrderController
         order_item:
             classes:
                 model: App\Entity\Order\OrderItem
-                controller: App\Controller\Order\ProductOrderItemController
+                controller: App\Controller\Order\OrderItemController
         order_item_unit:
             classes:
                 model: App\Entity\Order\OrderItemUnit
@@ -146,7 +146,6 @@ sylius_product:
             classes:
                 model: App\Entity\Product\Product
                 controller: App\Controller\Product\ProductResourceController
-               # repository: App\Repository\ProductOrderRepository
             translation:
                 classes:
                     model: App\Entity\Product\ProductTranslation
@@ -238,6 +237,7 @@ sylius_user:
             user:
                 classes:
                     model: App\Entity\User\AdminUser
+                    controller: App\Controller\Admincontroller\DashboardController
         shop:
             user:
                 classes:

@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace App\Repository\Order;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
-class ProductOrderRepository extends EntityRepository implements OrderRepositoryInterface
+abstract class ProductOrderRepository extends OrderRepository
 {
     /**
      * {@inheritdoc}

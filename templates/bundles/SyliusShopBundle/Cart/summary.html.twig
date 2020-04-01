@@ -13,8 +13,12 @@
         {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
         <div class="ui stackable grid">
             <div class="eleven wide column">
-            <p>merde</p>
-          
+            <div class="brown font-choix-metier">
+              {% for job in metier %}
+                <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
+                <p class="white center">Bonne chance dans vos recherches !</p>
+            {% endfor %}
+                </div>
                 {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
                 
             </div>

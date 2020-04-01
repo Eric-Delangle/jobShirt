@@ -4,57 +4,34 @@ declare(strict_types=1);
 
 namespace App\Controller\Order;
 
-use App\Form\JobType;
-use App\Entity\Order\Metier;
+use Webmozart\Assert\Assert;
 use FOS\RestBundle\View\View;
-use PHPUnit\Framework\Assert;
 use App\Entity\Order\OrderItem;
-use App\Repository\Order\MetierRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Order\SyliusCartEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Response;
-use App\Repository\Order\ProductOrderRepository;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Component\Order\Context\CartContextInterface;
-use Sylius\Bundle\OrderBundle\Controller\OrderController;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
-
-class ProductOrderController extends OrderController
+class OrderController extends ResourceController
 {
-    public function job(ProductOrderRepository $orderrepo, Request $request) {
 
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $cart = $this->getCurrentCart();
-       $metier = $orderrepo->findAll();
-       $metier->getMetier();
-
-       $form = $this->resourceFormFactory->create($configuration, $cart);
-
-       $view = View::create()
-           ->setTemplate($configuration->getTemplate('summary.html'))
-           ->setData([
-               'cart' => $cart,
-               'metier' => $metier,
-               'form' => $form->createView(),
-           ])
-       ;
-
-       return $this->viewHandler->handle($configuration, $view);
-       dump($metier);
-    }
-   
-
-    public function summaryAction(Request $request): Response
+    public function summaryAction(Request $request, EntityManagerInterface $em): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $cart = $this->getCurrentCart();
+       // je vais récuperer le metier enregistré  par le client afin de pouvoir l'afficher.
+      $metier = $em->getRepository(OrderItem::class)->findAll();
+
+   $cart = $this->getCurrentCart();
         if (null !== $cart->getId()) {
             $cart = $this->getOrderRepository()->findCartById($cart->getId());
         }
@@ -69,10 +46,11 @@ class ProductOrderController extends OrderController
             ->setTemplate($configuration->getTemplate('summary.html'))
             ->setData([
                 'cart' => $cart,
+               'metier' => $metier,
                 'form' => $form->createView(),
             ])
         ;
-
+        
         return $this->viewHandler->handle($configuration, $view);
     }
 
@@ -238,7 +216,7 @@ class ProductOrderController extends OrderController
 
         $request->getSession()->remove('sylius_order_id');
         $order = $this->repository->find($orderId);
-       // Assert::notNull($order);
+        Assert::notNull($order);
 
         $view = View::create()
             ->setData([

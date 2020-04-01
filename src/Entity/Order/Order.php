@@ -15,5 +15,5 @@ use Sylius\Component\Core\Model\Order as BaseOrder;
  */
 class Order extends BaseOrder
 {
-
+ 
 }

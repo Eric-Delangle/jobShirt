@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\Order\ProductOrderRepository;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController as BaseResourceController;
@@ -33,72 +34,38 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController as BaseResourceCo
 class ProductResourceController extends BaseResourceController 
 {
 
-   
-    public function showAction(Request $request): Response
+    public function metier(ProductOrderRepository $orderrepo, Request $request): Response
     {
-
-        //$order = new Order();
-       // $metier = new Metier();
-      //  $form = $this->createForm(JobType::class, $metier, [
-          //  'method' => 'GET'
-      //  ]);
-       // $form->handleRequest($request);
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
         $form = $this->resourceFormFactory->create($configuration, $newResource);
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
         $product = $this->findOr404($configuration);
-
-        // COMPRENDRE POURQUOI L'APPEL DU SERVICE NE MARCHE PAS
-        //$recommendationService = $this->get('app.provider.product');
-
-        //$recommendedProducts = $recommendationService->getRecommendedProducts($product);
-
+        $metier = $orderrepo->findAll();
+        $metier->getMetier();
+ dump($metier);
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $product);
 
         $view = View::create($product);
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
+                ->setTemplateVar($this->metadata->getName())
+                ->setData([
+                    'configuration' => $configuration,
+                    'metadata' => $this->metadata,
+                    'resource' => $product,
+                    'metier' => $metier,
+                    'form' => $form->createView(),
+                    $this->metadata->getName() => $product,
+                ]);
+            
+            return $this->viewHandler->handle($configuration, $view);
 
-                  
-            /* Test choix du metier */
-
-           
-        
-           // dump($metier);
-
-           
-
-                if ($configuration->isHtmlRequest()) {
-                    $view
-                        ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
-                        ->setTemplateVar($this->metadata->getName())
-                        ->setData([
-                            'configuration' => $configuration,
-                            'metadata' => $this->metadata,
-                            'resource' => $product,
-                            //'metier' => $metier,
-                            //'order' => $metier,
-                            //'recommendedProducts' => $recommendedProducts,
-                            'form' => $form->createView(),
-                            $this->metadata->getName() => $product,
-                        ]);
-                        /*
-                             if ($form->isSubmitted() && $form->isValid()) {
-                               //  $order->getMetier();
-                                $manager = $this->getDoctrine()->getManager();
-                                $manager->persist($metier);
-                                $manager->flush();
-    
-                                $this->addFlash('success', 'Votre profession a bien été enregistrée!');
-                            
-                            return $this->viewHandler->handle($configuration, $view);
-                            
-                            }
-                            */
-                    return $this->viewHandler->handle($configuration, $view);
- 
-                }
-        
         }
+    }
+
+
 
         public function createAction(Request $request): Response
     {

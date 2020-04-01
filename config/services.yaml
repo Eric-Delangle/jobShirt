@@ -22,10 +22,10 @@ services:
             - { name: form.type_extension, extended_type: Sylius\Bundle\OrderBundle\Form\Type\CartItemType }
 
     app.provider.order:
-        class: App\Provider\OrderProvider
-        arguments: ['@sylius.repository.order']
-        public: true
-
+        class: App\Provider\Order
+        arguments: ['@sylius.repository.order_item']
+        public: false
+           
     #app.form.extension.type.cart_item:
         #class: App\Form\Extension\CartItemTypeExtension
         #tags:
@@ -43,8 +43,8 @@ services:
         #tags: ['sylius.controller.product_order_item:addAction']
         #public: true
 
-    App\Controller\Order\ProductOrderItemController:
-        autowire: false
+    App\Controller\Order\OrderItemController:
+        autowire: true
 
     _instanceof:
         Sylius\Bundle\ResourceBundle\Controller\ResourceController:

@@ -80,7 +80,7 @@ dump($channelCode);
             $data['currency'] = $channel->getBaseCurrency()->getCode();
         }
 
-        return $this->templatingEngine->renderResponse('@SyliusAdmin/Dashboard/index.html.twig', $data);
+        return $this->templatingEngine->renderResponse('@App/Controller/Admincontroller/Dashboard/index.html.twig', $data);
     }
 
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface

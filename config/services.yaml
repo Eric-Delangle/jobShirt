@@ -46,6 +46,9 @@ services:
     App\Controller\Order\OrderItemController:
         autowire: true
 
+    App\Controller\ResourceController:
+        autowire: true
+
     _instanceof:
         Sylius\Bundle\ResourceBundle\Controller\ResourceController:
             autowire: false

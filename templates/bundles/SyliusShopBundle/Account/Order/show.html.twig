@@ -1,0 +1,14 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block breadcrumb %}
+    {% include '@SyliusShop/Account/Order/Show/_breadcrumb.html.twig' %}
+    <p>merde</p>
+     {% for job in metier %}
+                <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
+                <p class="white center">Bonne chance dans vos recherches !</p>
+            {% endfor %}
+{% endblock %}
+
+{% block subcontent %}
+    {{ sylius_template_event('sylius.shop.account.order.show.subcontent', _context) }}
+{% endblock %}

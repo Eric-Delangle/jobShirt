@@ -9,22 +9,20 @@ use Webmozart\Assert\Assert;
 use FOS\RestBundle\View\View;
 use App\Entity\Order\OrderItem;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Controller\Order\OrderResourceController;
 use Sylius\Component\Order\SyliusCartEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\Controller\ResourceController;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
-class OrderController extends ResourceController
+class OrderController extends OrderResourceController
 {
     
     public function summaryAction(Request $request, EntityManagerInterface $em): Response
@@ -237,30 +235,5 @@ class OrderController extends ResourceController
 
         return $this->viewHandler->handle($configuration, $view);
     }
-/*
-    public function showAction(Request $request, EntityManagerInterface $em): Response
-    {
-         // je vais récuperer le metier enregistré  par le client afin de pouvoir l'afficher.
-      $metier = $em->getRepository(OrderItem::class)->findAll();
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
-        $resource = $this->findOr404($configuration);
-        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
-        $view = View::create($resource);
-        if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
-                ->setTemplateVar($this->metadata->getName())
-                ->setData([
-                    'metier' => $metier,
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resource' => $resource,
-                    $this->metadata->getName() => $resource,
-                ])
-            ;
-        }
-        return $this->viewHandler->handle($configuration, $view);
-    }
-    */
+
 }

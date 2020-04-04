@@ -26,16 +26,17 @@ services:
         arguments: ['@sylius.repository.order_item']
         public: false
            
+    
+
+
     #app.form.extension.type.cart_item:
         #class: App\Form\Extension\CartItemTypeExtension
         #tags:
            # - { name: form.type_extension, extended_type: Sylius\Bundle\OrderBundle\Form\Type\CartItemType }
 
-    #sylius.controller.order:
-        #class: App\Controller\Order\ProductOrderController
-        #arguments: ['sylius.repository.order']
-        #tags: ['controller.service_arguments']
-        #public: true
+    app.order_resource_controller:
+        class: App\Controller\Order\OrderResourceController
+        public: true
 
     #sylius.order_item:
         #class: App\Controller\Order\ProductOrderItemController
@@ -46,7 +47,7 @@ services:
     App\Controller\Order\OrderItemController:
         autowire: true
 
-    App\Controller\ResourceController:
+    App\Controller\OrderResourceController:
         autowire: true
 
     _instanceof:

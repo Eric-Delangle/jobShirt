@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Order;
 
 use App\Entity\Order\Order;
 use FOS\RestBundle\View\View;
@@ -20,25 +20,24 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Response;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController as BaseResourceController;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController as ResourceController;
 
-class ResourceController extends BaseResourceController
+abstract class OrderResourceController extends ResourceController
 {
     
-    public function showAction(Request $request, EntityManagerInterface $em): Response
+    public function showAction(Request $request): Response
     {
      
-
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
         $resource = $this->findOr404($configuration);
 
         // je récupere l'id de l'order
-       $orderId = $resource->getId();
-       dump($orderId);
+       $orderId = $resource->getId();    
 
     // je vais récuperer le metier enregistré  par le client afin de pouvoir l'afficher.
-    $toutlorder = $em->getRepository(OrderItem::class)->findBy(['order'=>$orderId]);
+    // mais comme apparement je ne peux utiliser l'injection de dépendance ici , j'utilise $this->getDocrtine() qui a l'air de fonctionner.
+    $toutlorder = $this->getDoctrine()->getRepository(OrderItem::class)->findBy(['order'=>$orderId]);
   
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
         $view = View::create($resource);

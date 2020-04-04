@@ -192,6 +192,11 @@ sylius_promotion:
             classes:
                 model: App\Entity\Promotion\PromotionCoupon
 
+#sylius_resource:
+    #resources:
+        #classes:
+           # controller: App\Controller\Order\OrderResourceController
+
 sylius_review:
     resources:
         product:

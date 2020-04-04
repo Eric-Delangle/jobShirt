@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace App\Controller\Admincontroller;
 
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
-use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 
-final class DashboardController
+final class DashboardController 
 {
     /** @var DashboardStatisticsProviderInterface */
     private $statisticsProvider;

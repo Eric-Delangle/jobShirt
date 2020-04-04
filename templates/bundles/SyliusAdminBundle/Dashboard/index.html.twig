@@ -3,5 +3,6 @@
 {% block title %}{{ 'sylius.ui.dashboard'|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
+<p>Cette fois tu es sur la bonne page, tu commences à être moins con.</p>
     {{ sylius_template_event('sylius.admin.dashboard.content', _context) }}
 {% endblock %}

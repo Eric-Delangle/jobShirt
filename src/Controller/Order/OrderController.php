@@ -127,7 +127,7 @@ class OrderController extends OrderResourceController
 
         $view = View::create()
             ->setData([
-                'configuration' => $configuration,
+                 'configuration' => $configuration,
                 $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
                 'cart' => $resource,

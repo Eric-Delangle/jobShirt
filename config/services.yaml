@@ -16,10 +16,10 @@ services:
         # fetching services directly from the container via $container->get() won't work
         public: false
 
-    app.form.extension.type.order_item:
-        class: App\Form\Extension\CartItemTypeExtension
-        tags:
-            - { name: form.type_extension, extended_type: Sylius\Bundle\OrderBundle\Form\Type\CartItemType }
+    #app.form.extension.type.order_item:
+        #class: App\Form\Extension\CartItemTypeExtension
+        #tags:
+            #- { name: form.type_extension, extended_type: Sylius\Bundle\OrderBundle\Form\Type\CartItemType }
 
     app.provider.order:
         class: App\Provider\Order

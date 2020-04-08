@@ -2,10 +2,12 @@
 
 {% block breadcrumb %}
     {% include '@SyliusShop/Account/Order/Show/_breadcrumb.html.twig' %}
-    <p>merde</p>
+   
      {% for job in metier %}
-                <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
-                <p class="white center">Bonne chance dans vos recherches !</p>
+        <div class="brown mb-3 font-choix-metier">
+                    <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
+                    <p class="white center">Bonne chance dans vos recherches !</p>
+            </div>
             {% endfor %}
 {% endblock %}
 

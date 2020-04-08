@@ -13,13 +13,9 @@ declare(strict_types=1);
 
 namespace App\Form\Extension;
 
-use App\Entity\Order\OrderItem;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Sylius\Bundle\OrderBundle\Form\Type\CartItemType;
-use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 

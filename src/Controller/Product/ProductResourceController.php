@@ -43,7 +43,7 @@ class ProductResourceController extends BaseResourceController
         $product = $this->findOr404($configuration);
         $metier = $orderrepo->findAll();
         $metier->getMetier();
- dump($metier);
+
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $product);
 
         $view = View::create($product);

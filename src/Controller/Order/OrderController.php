@@ -110,6 +110,7 @@ class OrderController extends OrderResourceController
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($resource));
+         //   $this->persist($resource);
             $this->manager->flush();
 
             if (!$configuration->isHtmlRequest()) {

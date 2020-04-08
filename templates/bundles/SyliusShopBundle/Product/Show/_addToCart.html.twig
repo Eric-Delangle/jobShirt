@@ -18,8 +18,10 @@
     {{ form_row(form.cartItem.quantity, sylius_test_form_attribute('quantity')) }}
 
     {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item}) }}
+    
+{# Ajout du champs de choix du métier dans le formulaire #}
+      {{ form_row(form.cartItem.metier, { 'label': 'Votre profession' })}}  
 
-  {{ form_rest(form)}}
     <button type="submit" class="ui huge primary icon labeled button" {{ sylius_test_html_attribute('add-to-cart-button') }}><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}

@@ -7,7 +7,7 @@
 {% block content %}
 
     {% for job in metier %}
-                <p  class="white center">L'emploi  recherché pour cette commande  est : {{ job.metier }}. </p>
+                <p  class="white center fond_info">L'emploi  recherché pour cette commande  est : {{ job.metier }}. </p>
             {% endfor %}
 
     {{ sylius_template_event('sylius.admin.order.show.content', _context) }}

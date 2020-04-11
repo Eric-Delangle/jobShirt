@@ -5,11 +5,12 @@
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.complete.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'complete', 'orderTotal': order.total})) }}
     {# la j'affiche le métier choisi  au moment du récapitulatif de la commande #}
+    <div class="brown font-choix-metier">       
             {% for job in metier %}
                 <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
                 <p class="white center">Bonne chance dans vos recherches !</p>
             {% endfor %}
-
+    </div>
     <div class="ui padded segment">
    
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}

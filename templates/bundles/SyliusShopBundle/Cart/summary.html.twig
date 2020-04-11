@@ -13,24 +13,24 @@
         {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
         <div class="ui stackable grid">
             <div class="eleven wide column">
-            <div class="brown font-choix-metier">
-            
-              {% for job in metier %}
-                <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
-                <p class="white center">Bonne chance dans vos recherches !</p>
-            {% endfor %}
-        
-                </div>
-                {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
-                
+            <div class="brown font-choix-metier">       
+                {% for job in metier %}
+                    <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
+                    <p class="white center">Bonne chance dans vos recherches !</p>
+                    {% endfor %}
+            </div>
+                {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}    
             </div>
             <div class="five wide column">
                 {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
-            </div>
-            
+            </div>       
         </div>
         {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
     {% else %}
         {{ messages.info('sylius.ui.your_cart_is_empty') }}
     {% endif %}
+    {% block javascript %}
+    {# ici je fais disparaitre le bouton vider le panier qui déconne #}
+        <script> document.getElementById("sylius-cart-clear").style.display="none";</script>
+    {% endblock %}
 {% endblock %}

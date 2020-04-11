@@ -36,12 +36,16 @@ class OrderController extends OrderResourceController
 
         // je récupere l'id' de l'order en cours
             $orderId = $order->getId();
-
+            // soucis pour vider le panier
+          
         // je récupere le metier de l'order en cours
             $metier = $em->getRepository(OrderItem::class)->findBy(['order'=>$orderId]);
-
+if($orderId== null ){
+    return $this->viewHandler->handle($configuration, View::create($cart));
+ }
         if (null !== $cart->getId()) {
             $cart = $this->getOrderRepository()->findCartById($cart->getId());
+       
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -80,7 +84,7 @@ class OrderController extends OrderResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    public function saveAction(Request $request): Response
+    public function saveAction(Request $request, EntityManagerInterface $em): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -107,10 +111,10 @@ class OrderController extends OrderResourceController
                 $this->stateMachine->apply($configuration, $resource);
             }
 
+
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($resource));
-         //   $this->persist($resource);
             $this->manager->flush();
 
             if (!$configuration->isHtmlRequest()) {
@@ -139,12 +143,15 @@ class OrderController extends OrderResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    public function clearAction(Request $request): Response
+    public function clearAction(Request $request, EntityManagerInterface $em): Response
     {
+        
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->getCurrentCart();
+
 
         if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');

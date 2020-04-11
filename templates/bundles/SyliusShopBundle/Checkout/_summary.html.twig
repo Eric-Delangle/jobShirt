@@ -65,7 +65,7 @@
             {% if order.shipments is not empty %}
                 <tr>
                     <td colspan="1">
-                        <strong>{{ 'sylius.ui.shipping_estimated_cost'|trans }}:</strong>
+                        <strong>{{ 'Frais de port estimés'|trans }}:</strong>
                     </td>
                     <td colspan="2" class="right aligned">
                         {% if order.getAdjustmentsTotal('shipping') > order.shippingTotal %}

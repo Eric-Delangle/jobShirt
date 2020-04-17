@@ -38,11 +38,9 @@ services:
         class: App\Controller\Order\OrderResourceController
         public: true
 
-    #sylius.order_item:
-        #class: App\Controller\Order\ProductOrderItemController
-        #arguments: ['controller.service_arguments']
-        #tags: ['sylius.controller.product_order_item:addAction']
-        #public: true
+    app..infos_controller:
+        class: App\Controller\Infos\InfosController
+        public: true
 
     App\Controller\Order\OrderItemController:
         autowire: true

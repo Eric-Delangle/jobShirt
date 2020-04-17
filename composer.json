@@ -16,7 +16,9 @@
     ],
     "require": {
         "php": "^7.3",
+        "sensio/framework-extra-bundle": "^5.5",
         "sylius/sylius": "~1.7.0@rc",
+        "symfony/apache-pack": "^1.0",
         "symfony/dotenv": "^4.4",
         "symfony/flex": "^1.2"
     },

@@ -3,27 +3,22 @@
         <div class="ui inverted divided equal height stackable grid">
             {{ sonata_block_render_event('sylius.shop.layout.before_footer') }}
 
-            <div class="three wide column">
-                <h4 class="ui inverted header">{{ 'sylius.ui.your_store'|trans }}</h4>
+            <div class="three wide column mr-5">
+                <h4 class="ui inverted header police font_footer">Informations {{ 'sylius.ui.your_store'|trans }}</h4>
                 <div class="ui inverted link list">
-                    <a href="{{ asset('/apropos.html.twig') }}" class="item">{{ 'sylius.ui.about'|trans }}</a>
-                    <a href="#" class="item">{{ 'sylius.ui.terms_and_conditions'|trans }}</a>
-                    <a href="#" class="item">{{ 'sylius.ui.privacy_policy'|trans }}</a>
-                    <a href="{{ path('sylius_shop_contact_request') }}" class="item">{{ 'sylius.ui.contact_us'|trans }}</a>
+                    <a href= "{{ path ('app.Infos.apropos') }}" class="item center">{{'sylius.ui.about' | trans}} </a>
+                    <a href="{{ path ('app.Infos.conditions') }}" class="item center">{{ 'sylius.ui.terms_and_conditions'|trans }}</a>
                 </div>
             </div>
-            <div class="three wide column">
-                <h4 class="ui inverted header">{{ 'sylius.ui.customer_care'|trans  }}</h4>
+            <div class="three wide column mr-5">
+                <h4 class="ui inverted header police font_footer">{{ 'sylius.ui.customer_care'|trans  }}</h4>
                 <div class="ui inverted link list">
-                    <a href="{{ path('sylius_shop_contact_request') }}" class="item">{{ 'sylius.ui.contact_us'|trans  }}</a>
-                    <a href="#" class="item">{{ 'sylius.ui.faqs'|trans  }}</a>
-                    <a href="#" class="item">{{ 'sylius.ui.delivery_and_shipping'|trans  }}</a>
-                    <a href="#" class="item">{{ 'sylius.ui.returns_policy'|trans  }}</a>
+                    <a href="{{ path('sylius_shop_contact_request') }}" class="item center">{{ 'sylius.ui.contact_us'|trans  }}</a>
                 </div>
             </div>
-            <div class="eight wide column">
-                <h4 class="ui inverted header">&copy; {{ 'sylius.ui.your_store'|trans }}</h4>
-                <p>{{ 'sylius.ui.powered_by'|trans }} <a href="http://ericdelangle.fr" target="_blank" style="color: #1abb9c;">ericdelangle.fr</a>.</p>
+            <div class="eight wide column mr-5">
+                <h4 class="ui inverted header police font_footer">&copy; {{ 'sylius.ui.your_store'|trans }}</h4>
+                <p class="center">{{ 'sylius.ui.powered_by'|trans }} <a href="http://ericdelangle.fr" target="_blank" style="color: #1abb9c;">ericdelangle.fr</a>.</p>
             </div>
 
             {{ sonata_block_render_event('sylius.shop.layout.after_footer') }}

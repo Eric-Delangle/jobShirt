@@ -4,3 +4,22 @@ sylius.controller.order:
     defaults:
         _controller: app.controller.order.order:job
   
+app.Infos.apropos:
+    path: /Homepage/Infos/apropos
+    controller: App\Controller\Infos\InfosController::infosAPropos
+        
+app.Infos.conditions:
+    path: /Homepage/Infos/conditions
+    controller: App\Controller\Infos\InfosController::conditions
+
+#app.Infos.faqs:
+    #path: /Homepage/Infos/faqs
+    #controller: App\Controller\Infos\InfosController::faqs
+
+#app.Infos.livraison:
+   # path: /Homepage/Infos/livraison
+    #controller: App\Controller\Infos\InfosController::livraison
+
+#app.Infos.retour:
+   # path: /Homepage/Infos/retour
+    #controller: App\Controller\Infos\InfosController::retour

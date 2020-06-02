@@ -17,6 +17,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Sylius\Bundle\OrderBundle\Form\Type\CartItemType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
 class CartItemTypeExtension extends AbstractTypeExtension
@@ -28,7 +30,15 @@ class CartItemTypeExtension extends AbstractTypeExtension
             ->add('metier', TextType::class, [
                 'required' => true,
                 'label' => 'Votre profession',
-                ]);
+                ])
+                ->add('genre', ChoiceType::class, [
+                    'choices' => [ 
+                    'Homme' => 'homme',
+                    'Femme' =>  'femme',
+                    ],
+                    'multiple' => false
+                ])
+             ;
     }
 
     

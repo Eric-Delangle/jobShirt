@@ -15,7 +15,8 @@
             <div class="eleven wide column">
             <div class="brown font-choix-metier">       
                 {% for job in metier %}
-                    <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
+                    <p  class="white center">L'emploi que vous recherchez pour votre <span class="black">{{ job.product.name }}</span> est <span class="black">{{ job.metier }}</span>&nbsp. </p>
+                    <p class="white center">Pour <span class="black">{{ job.genre }}</span>&nbsp.</p>
                     <p class="white center">Bonne chance dans vos recherches !</p>
                     {% endfor %}
             </div>

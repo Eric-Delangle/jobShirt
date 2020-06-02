@@ -38,31 +38,34 @@ use Sylius\Bundle\OrderBundle\Controller\OrderItemController as BaseOrderItemCon
 class OrderItemController extends BaseOrderItemController
 { 
     
-     /* TEST */
+     /* TEST
+     * pour choisir le metier et le genre 
+     */
 
      public function addChoixMetier(Request $request, ProductOrderRepository $repometier)
      { 
         $metier = $repometier->find(['OrderItem' => 'metier']);
+        $genre = $repometier->find(['OrderItem' => 'genre']);
         $cart = $this->getCurrentCart();
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $orderItem = $this->newResourceFactory->create($configuration, $this->factory);
-       // $id = $this->getId();
        $form = $this->getFormFactory()->create(
         $configuration->getFormType(),
         $this->createAddToCartCommand($cart, $orderItem),
         $configuration->getFormOptions()
     );
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        
+        dump($metier);
+        dump($genre);
 
         $cart = $this->getCurrentCart();
 
         $cartManager = $this->getCartManager();
-        $cartManager->persist($cart, $metier);
+        $cartManager->persist($cart, $metier, $genre);
         $cartManager->flush();
 
        
-        $resourceControllerEvent = $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $cart, $metier);
+        $resourceControllerEvent = $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $cart, $metier, $genre);
         if ($resourceControllerEvent->hasResponse()) {
             return $resourceControllerEvent->getResponse();
         }
@@ -76,11 +79,13 @@ class OrderItemController extends BaseOrderItemController
          ->setData([
              
              'metier' => $metier,
+             'genre' => $genre
           
          ])
      ;
          return $this->viewHandler->handle($configuration, $view);
      }
+ 
  
     /* FIN TEST */
 

@@ -17,7 +17,7 @@
       
         <div class="container cont_logo">
             
-                <h1 class="police white font"><a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" alt="logo" class="ui small image" /></a>Job<span class="red dollar shad">$</span>hirt les vêtements qui vous trouvent du boulot !</h1>
+                <h1 class="police font"><a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" alt="logo" class="ui small image" /></a>Job<span class="red dollar shad">$</span>hirt les vêtements qui vous trouvent du boulot !</h1>
             
             
         </div>
@@ -30,9 +30,11 @@
         <div class="column">
             {{ sonata_block_render_event('sylius.shop.layout.header') }}
         </div>
+        {#
         <div class="right aligned column right">
             {{ render(url('sylius_shop_partial_cart_summary', {'template': '@SyliusShop/Cart/_widget.html.twig'})) }}
         </div>
+        #}
     </div>
 </div>
 {% block javascript %}

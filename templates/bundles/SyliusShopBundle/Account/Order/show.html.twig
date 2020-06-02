@@ -5,7 +5,7 @@
    
      {% for job in metier %}
         <div class="brown mb-3 font-choix-metier">
-                    <p  class="white center">L'emploi que vous recherchez est {{ job.metier }}. </p>
+                    <p  class="white center">L'emploi que vous recherchez pour votre <span class="black">{{ job.product.name }}</span> est {{ job.metier }}. </p>
                     <p class="white center">Bonne chance dans vos recherches !</p>
             </div>
             {% endfor %}

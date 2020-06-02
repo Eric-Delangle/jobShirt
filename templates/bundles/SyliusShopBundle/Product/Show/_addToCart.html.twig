@@ -19,9 +19,17 @@
 
     {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item}) }}
     
-{# Ajout du champs de choix du métier dans le formulaire #}
+{# Ajout des champs de choix du métier et du genre dans le formulaire #}
       {{ form_row(form.cartItem.metier, { 'label': 'Votre profession' })}}  
 
+{# Si je suis dans la categorie t-shirt femme je ne veux pas que l'on puisse choisir le genre #}
+      {% if  product.code !=  "t-shirts-femme"  and  product.id != 2 %}
+        {{ form_row(form.cartItem.genre, {'label': 'Votre visuel (homme ou femme)'  })}}  
+        
+    {% endif %}
+
+{# if product.code != "t-shirt-standard'" #}
+    
     <button type="submit" class="ui huge primary icon labeled button" {{ sylius_test_html_attribute('add-to-cart-button') }}><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}

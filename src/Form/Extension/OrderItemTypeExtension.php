@@ -23,7 +23,8 @@ class OrderItemTypeExtension extends AbstractTypeExtension
     
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('metier');
+        $builder->add('metier')
+                            ->add('genre');
     }
 
     

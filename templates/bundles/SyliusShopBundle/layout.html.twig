@@ -2,13 +2,24 @@
 
 <html lang="{{ app.request.locale|slice(0, 2) }}">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97383317-6"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-97383317-6');
+        </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="{{ asset('logofavicon.png') }}     http://votresite.com/templates/votre_template/icon/favicon.ico" />
+   <link rel="shortcut icon" type="image/png" href="/media/image/favicon.png"/>
     <title>{% block title %}JobShirt{% endblock %}</title>
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
+    <meta name="description" content="Vente de vêtements aidant à la recherche de travail"/>
+    <meta name="keywords" content="emploi,t-shirt,sweat-shirt,sac,jobshirt,eric delangle,job,boulot,recherche,travail,chomage,contrat,recruteur"/>
     {% block metatags %}
     {% endblock %}
 
@@ -22,13 +33,7 @@
 
         {{ sonata_block_render_event('sylius.shop.layout.stylesheets') }}
     {% endblock %}
-    {# 
-      {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-#}
+ 
     {{ sonata_block_render_event('sylius.shop.layout.head') }}
 </head>
 
@@ -53,14 +58,15 @@
     <div class="ui container">
         {% block header %}
             <header>
-                    {% include '@SyliusShop/_header.html.twig' %}
+                {% include '@SyliusShop/_header.html.twig' %}
 
-                    {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
+                {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
 
-                   {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }} 
+               {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
+               
             </header>
         {% endblock %}
-
+        
         {% include '@SyliusShop/_flashes.html.twig' %}
 
         {{ sonata_block_render_event('sylius.shop.layout.before_content') }}

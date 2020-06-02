@@ -1,0 +1,19 @@
+<div class="carousel-wrapper">
+    <div class="carousel">
+        {% for product in products %}
+            <div class="carousel-item">
+                {% include '@SyliusShop/Product/_box.html.twig' %}
+            </div>
+        {% endfor %}
+    </div>
+{#  j'enlève les fleches du carousel qui ne me servent pour l'instant a rien
+    <div class="carousel-nav">
+        <button class="carousel-left ui huge black icon button">
+            <i class="left arrow icon"></i>
+        </button>
+        <button class="carousel-right ui huge black icon button">
+            <i class="right arrow icon"></i>
+        </button>
+    </div>
+    #}
+</div>

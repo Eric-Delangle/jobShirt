@@ -1,4 +1,16 @@
+
+{% block stylesheets %}
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+{% endblock %}
 {% set product = order_item.variant.product %}
+{# test d'affichage du visuel feminin #}
+{% if  product.code !=  "t-shirts-femme"  and  product.id != 2 %}
+<div  class="center genre">
+<p ><span class="fond_rouge">Homme </span><img src="{{ asset('assets/shop/img/logohomme.png') }}" alt="logo" class="" /></p>
+<p ><span class="fond_rouge">Femme</span><img src="{{ asset('assets/shop/img/logofemme.png') }}" alt="logo" class="" /></p>
+
+</div>
+{% endif %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
